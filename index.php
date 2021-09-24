@@ -1,91 +1,56 @@
-<?php include("template/header.php"); ?>
-<body class="d-flex flex-column h-100">
+<?php include "config.php"; ?>
+<?php $pageTitle = "List Of Users"; include("template/header.php"); ?>
+<?php
+$data = [];
+$handle = fopen("components/data.csv", "r");
+if ($handle !== false) {
+    while (! feof($handle)) {
+        $line = fgetcsv($handle);
+        if (empty($line)) {
+            continue;
+        }
+        array_push($data, $line);
+    }
+}
+fclose($handle);
 
-<div class="container pt-4 pb-4">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-        <a class="navbar-brand" href="#">HTML CRUD Template</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09"
-                aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarsExample09">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="create.html">Create</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">FAQ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://pisyek.com/contact">Help</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-md-0">
-                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </form>
-        </div>
-    </nav>
-</div>
-
+?>
 <main role="main" class="flex-shrink-0">
     <div class="container">
-        <h1>List of User</h1>
-        <table class="table table-striped table-hover">
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <h1>List of User</h1>
+            <a class="btn btn-success" href="<?= SITE_URL; ?>create.php">Add User</a>
+        </div>
+        <table class="table table-striped table-hover table-bordered">
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Birthday</th>
+                <th scope="col">Mobile</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
+            <?php $counter = 1; if (! empty($data)): foreach ($data as $item): ?>
+                <tr>
+                <th scope="row"><?= $counter ++; ?></th>
+                <td><?= $item[0]; ?></td>
+                <td><?= $item[1]; ?></td>
+                <td><?= $item[2]; ?></td>
+                <td><?= $item[3]; ?></td>
                 <td>
                     <a href="view.html">
-                        <button class="btn btn-primary btn-sm">View</button>
+                        <button class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i></button>
                     </a>
                     <a href="edit.html">
-                        <button class="btn btn-outline-primary btn-sm">Edit</button>
+                        <button class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i></button>
                     </a>
-                    <button class="btn btn-sm">Delete</button>
+                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
                 </td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>
-                    <a href="view.html">
-                        <button class="btn btn-primary btn-sm">View</button>
-                    </a>
-                    <a href="edit.html">
-                        <button class="btn btn-outline-primary btn-sm">Edit</button>
-                    </a>
-                    <button class="btn btn-sm">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>
-                    <a href="view.html">
-                        <button class="btn btn-primary btn-sm">View</button>
-                    </a>
-                    <a href="edit.html">
-                        <button class="btn btn-outline-primary btn-sm">Edit</button>
-                    </a>
-                    <button class="btn btn-sm">Delete</button>
-                </td>
-            </tr>
+            <?php endforeach;endif; ?>
             </tbody>
         </table>
     </div>

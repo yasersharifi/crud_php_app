@@ -2,7 +2,7 @@
     <div class="container pb-5">
         <hr>
         <span class="text-muted">
-                    Copyright &copy; 2019 | <a href="https://pisyek.com">Pisyek.com</a>
+                    Develop By  <a href="mailto:yassersharifi74@gmail.com">Yaser Sharifi</a>
             </span>
     </div>
 </footer>
