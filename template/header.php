@@ -19,7 +19,7 @@
 
 <div class="container-fluid pt-4 pb-4 mb-5">
     <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-lg">
-        <a class="navbar-brand" href="#">HTML CRUD Template</a>
+        <a class="navbar-brand text-warning" href="#">PHP Crud Application</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09"
                 aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

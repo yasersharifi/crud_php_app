@@ -25,7 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container">
             <div class="card">
                 <div class="card-body">
-                    <h1>Create New User</h1>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1>Create New User</h1>
+                        <a href="index.php" class="btn btn-info">Go Back</a>
+                    </div>
                     <hr>
                     <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                         <div class="row">
@@ -47,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                         </div>
                         <hr>
-                        <button type="submit" name="submit" value="add" class="btn btn-success">add</button>
+                        <button type="submit" name="submit" value="add" class="btn btn-success">Add</button>
                     </form>
                 </div>
             </div>
