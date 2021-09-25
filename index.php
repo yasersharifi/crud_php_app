@@ -14,6 +14,43 @@ if ($handle !== false) {
 }
 fclose($handle);
 
+// delete user
+if (isset($_GET["fname"]) && isset($_GET["lname"])) {
+
+    $lines = array();
+    $delHandle = fopen("components/data.csv", "r");
+
+        if ($delHandle !== false) {
+            while (! feof($delHandle)) {
+                $line = fgetcsv($delHandle);
+                if (!empty($line)) {
+                    if ($line[0] == $_GET["fname"] && $line[1] == $_GET["lname"]) {
+                        continue;
+                    } else {
+                        $lines[] = $line;
+                    }
+                }
+            }
+        }
+
+    fclose($delHandle);
+
+    // put lines in data.csv file
+    $putHandle = fopen("components/data.csv", "w");
+
+    if ($putHandle !== false) {
+        foreach ($lines as $fields) {
+            fputcsv($putHandle, $fields);
+        }
+    }
+
+    fclose($putHandle);
+
+    header("Location: index.php");
+    exit();
+
+}
+
 ?>
 <main role="main" class="flex-shrink-0">
     <div class="container">
@@ -41,13 +78,13 @@ fclose($handle);
                 <td><?= $item[2]; ?></td>
                 <td><?= $item[3]; ?></td>
                 <td>
-                    <a href="view.html">
+                    <a href="view.php<?= '?fname=' . $item[0] . '&lname=' .$item[1]; ?>">
                         <button class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i></button>
                     </a>
                     <a href="edit.html">
                         <button class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-square"></i></button>
                     </a>
-                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+                    <a href="<?= '?fname=' . $item[0] . '&lname=' .$item[1]; ?>"  class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>
             <?php endforeach;endif; ?>
